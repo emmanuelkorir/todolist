@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -14,12 +15,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //express to use css, images files. create public directory
 app.use(express.static('public'));
 
-mongoose.connect(
-  'mongodb+srv://emmanuelqkorir:Test123@cluster0.tlang.mongodb.net/todolistDB',
-  {
-    useNewUrlParser: true,
-  }
-);
+const URI = process.env.ATLAS_URI;
+
+mongoose.connect(URI, {
+  useNewUrlParser: true,
+});
 
 const itemsSchema = {
   name: String,
